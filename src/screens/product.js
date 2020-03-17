@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
+import Dialog from 'react-native-dialog';
 import {
   Text,
   View,
@@ -40,6 +40,7 @@ export default class product extends Component {
       user: '',
       keyword: '',
       page: 1,
+      clear: false,
     };
     //this.getTv = _.debounce(this.getTv, 1000);
   }
@@ -221,33 +222,42 @@ export default class product extends Component {
 
   finish = user => {
     if (this.state.qty.length === 1) {
-      axios
-        .post(`http://192.168.1.181:4002/api/v1/shop/${user}`, {
-          id_item: this.state.qty[0].Id,
-          qty: this.state.qty[0].qty,
-        })
-        .then(function(response) {
-          axios.patch(`http://192.168.1.181:4002/api/v1/shop/`);
-        });
+      axios.post(`http://192.168.1.181:4002/api/v1/shop/`, {
+        id_item: this.state.qty[0].Id,
+        qty: this.state.qty[0].qty,
+      });
+
       console.log(this.state.qty.length);
     } else {
-      for (let i = 0; i < this.state.qty.length; i++) {
-        axios
-          .post(`http://192.168.1.181:4002/api/v1/shop/${user}`, {
-            id_item: this.state.qty[i].Id,
-            qty: this.state.qty[i].qty,
-          })
-          .then(function(response) {});
-        axios.patch(`http://192.168.1.181:4002/api/v1/shop/`);
-      }
+      const _storeData = async () => {
+        try {
+          this.state.qty.forEach(async i => {
+            await axios.post(`http://192.168.1.181:4002/api/v1/shop/`, {
+              id_item: i.Id,
+              qty: i.qty,
+            });
+          });
+        } catch (e) {}
+      };
+
+      _storeData().then(async () => {
+        console.log('selesai');
+      });
     }
+
     this.setState({
+      user: user,
       total: 0,
       qty: [],
       cart: [],
-      dialogvisible: false,
     });
     //console.log(this.state.qty)
+  };
+  handleOk = async () => {
+    await axios.patch(
+      `http://192.168.1.181:4002/api/v1/shop/${this.state.user}`,
+    );
+    this.setState({clear: false, dialogvisible: false});
   };
   reset = () => {
     console.log(this.state.cart);
@@ -374,7 +384,13 @@ export default class product extends Component {
                     {/* {this.setState({dialogvisible: false})} */}
                   </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.finish(this.state.user)}>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.finish(this.state.user),
+                      this.setState({
+                        clear: true,
+                      });
+                  }}>
                   <View style={(styles.button, styles.modalButton)}>
                     <Text
                       style={{
@@ -443,6 +459,11 @@ export default class product extends Component {
               </View>
             </TouchableOpacity>
           )}
+          <Dialog.Container visible={this.state.clear}>
+            <Dialog.Title>successful transaction</Dialog.Title>
+
+            <Dialog.Button label="OK" onPress={this.handleOk} />
+          </Dialog.Container>
         </View>
       </SafeAreaView>
     );
