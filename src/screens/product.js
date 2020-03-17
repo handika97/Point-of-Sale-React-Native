@@ -268,8 +268,8 @@ export default class product extends Component {
           <View>
             <TextInput
               style={{
-                backgroundColor: '#169e4f',
-                opacity: 0.3,
+                backgroundColor: 'white',
+                opacity: 0.8,
                 width: 130,
                 height: 40,
                 marginTop: 5,
@@ -284,8 +284,11 @@ export default class product extends Component {
           </View>
           <View style={styles.sectionButton}>
             <TouchableOpacity onPress={() => this.getTv()}>
-              <View style={{marginTop: 15, marginLeft: 5}}>
-                <Text style={{fontSize: 17}}>Search</Text>
+              <View style={{marginLeft: 5}}>
+                <Image
+                  source={require('../image/search.png')}
+                  style={{height: 50, width: 50}}
+                />
               </View>
             </TouchableOpacity>
           </View>
@@ -405,26 +408,38 @@ export default class product extends Component {
           {this.state.page > 1 ? (
             <TouchableOpacity onPress={() => this.getTv(this.state.page - 1)}>
               <View style={(styles.button, styles.modalButton)}>
-                <Text style={{fontSize: 20, margin: 5}}>PREV</Text>
+                <Image
+                  source={require('../image/next.png')}
+                  style={{height: 50, width: 50, rotation: 180}}
+                />
               </View>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity Hidden>
               <View style={(styles.button, styles.modalButton)}>
-                <Text style={{fontSize: 20, margin: 5}}>PREV</Text>
+                <Image
+                  source={require('../image/next.png')}
+                  style={{height: 50, width: 50, rotation: 180}}
+                />
               </View>
             </TouchableOpacity>
           )}
           {this.state.result.length > 5 ? (
             <TouchableOpacity onPress={() => this.getTv(this.state.page + 1)}>
               <View style={(styles.button, styles.modalButton)}>
-                <Text style={{fontSize: 20, margin: 5}}>NEXT</Text>
+                <Image
+                  source={require('../image/next.png')}
+                  style={{height: 50, width: 50}}
+                />
               </View>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity Hidden>
               <View style={(styles.button, styles.modalButton)}>
-                <Text style={{fontSize: 2, margin: 50}}>NEXT</Text>
+                <Image
+                  source={require('../image/next.png')}
+                  style={{height: 50, width: 50}}
+                />
               </View>
             </TouchableOpacity>
           )}

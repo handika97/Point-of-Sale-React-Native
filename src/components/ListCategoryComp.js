@@ -39,46 +39,45 @@ export default class ListDataComp extends Component {
     console.log(this.state.name_category);
     return (
       <View>
-        <Content>
-          <List>
-            <ListItem style={styles.container}>
-              <Text style={styles.title} note>
-                {this.props.data.id}. {this.props.data.name_category}
-              </Text>
-              {/* <Text note></Text>
+        <List>
+          <ListItem style={styles.container}>
+            <Text style={styles.title} note>
+              {this.props.data.id}. {this.props.data.name_category}
+            </Text>
+            {/* <Text note></Text>
               <Text note> {this.props.data.name_Category}</Text> */}
-              <View style={styles.containers}>
-                <View style={styles.sectionButton}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      this.setState({
-                        dialogvisible: true,
-                        id: this.props.data.id,
-                        name_category: this.props.data.name_category,
-                      });
-                    }}>
-                    <View style={styles.button}>
-                      <Text style={styles.fontLogin}>Edit</Text>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.sectionButton}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      this.setState({
-                        dialogDelete: true,
-                        id: this.props.data.id,
-                      });
-                    }}>
-                    <View style={styles.button}>
-                      <Text style={styles.fontLogin}>Delete</Text>
-                    </View>
-                  </TouchableOpacity>
-                </View>
+            <View style={styles.containers}>
+              <View style={styles.sectionButton}>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.setState({
+                      dialogvisible: true,
+                      id: this.props.data.id,
+                      name_category: this.props.data.name_category,
+                    });
+                  }}>
+                  <View style={styles.button}>
+                    <Text style={styles.fontLogin}>Edit</Text>
+                  </View>
+                </TouchableOpacity>
               </View>
-            </ListItem>
-          </List>
-        </Content>
+              <View style={styles.sectionButton}>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.setState({
+                      dialogDelete: true,
+                      id: this.props.data.id,
+                    });
+                  }}>
+                  <View style={styles.button}>
+                    <Text style={styles.fontLogin}>Delete</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </ListItem>
+        </List>
+
         {/* <Modal
           animationType="slide"
           transparent={false}

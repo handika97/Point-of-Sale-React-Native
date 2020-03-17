@@ -161,11 +161,11 @@ class Record extends Component {
         <View style={{flexDirection: 'column'}}>
           <View style={{flexDirection: 'row', margin: 5, borderBottomWidth: 1}}>
             <Text style={{fontSize: 20, margin: 7}}>#</Text>
-            <Text style={{fontSize: 20, margin: 7, marginLeft: 20}}>
+            <Text style={{fontSize: 20, margin: 7, marginLeft: 8}}>
               Cashier
             </Text>
-            <Text style={{fontSize: 20, margin: 7, marginLeft: 20}}>Price</Text>
-            <Text style={{fontSize: 20, margin: 7, marginLeft: 20}}>Date</Text>
+            <Text style={{fontSize: 20, margin: 7, marginLeft: 15}}>Price</Text>
+            <Text style={{fontSize: 20, margin: 7, marginLeft: 70}}>Date</Text>
           </View>
           {/* <FlatList vertical showsVerticalScrollIndicator={true}> */}
           <ScrollView>
@@ -176,10 +176,24 @@ class Record extends Component {
                     flexDirection: 'row',
                     margin: 5,
                     borderBottomWidth: 1,
+                    alignContent: 'center',
+                    justifyContent: 'center',
                   }}>
-                  <Text style={{fontSize: 20, margin: 7}}>{i + 1}</Text>
-                  <Text style={{fontSize: 20, margin: 7}}>{history.user}</Text>
-                  <Text style={{fontSize: 20, margin: 7}}>{history.price}</Text>
+                  <Text
+                    style={{
+                      fontSize: 17,
+                      margin: 7,
+                      width: 20,
+                      marginLeft: -17,
+                    }}>
+                    {i + 1}
+                  </Text>
+                  <Text style={{fontSize: 20, margin: 7, width: 70}}>
+                    {history.user}
+                  </Text>
+                  <Text style={{fontSize: 20, margin: 7, width: 70}}>
+                    {history.price}
+                  </Text>
                   <Text style={{fontSize: 20, margin: 7}}>
                     {moment(history.timeFinal).format('D MMMM YYYY')}
                   </Text>

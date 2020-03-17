@@ -209,7 +209,29 @@ export default class ListDataComp extends Component {
           transparent={false}
           visible={this.state.editModal}
           style={{}}>
-          <View style={{backgroundColor: '#31a349'}}>
+          <View style={{backgroundColor: 'white'}}>
+            <View
+              style={{
+                height: 50,
+                //backgroundColor: 'grey',
+                marginTop: 0,
+                alignItems: 'center',
+                flexDirection: 'row',
+                paddingLeft: 20,
+                width: '100%',
+                borderBottomWidth: 2,
+                borderBottomColor: 'blue',
+                elevation: 7,
+              }}>
+              <Text
+                style={{
+                  fontFamily: 'Arial, Helvetica, sans-serif',
+                  color: 'black',
+                  fontSize: 30,
+                }}>
+                Edit Product
+              </Text>
+            </View>
             <View>
               <View>
                 <TextInput
@@ -217,8 +239,9 @@ export default class ListDataComp extends Component {
                     marginTop: 22,
                     fontSize: 18,
                     borderWidth: 2,
-                    backgroundColor: '#516f78',
+                    backgroundColor: 'white',
                     opacity: 0.8,
+                    elevation: 7,
                     width: 250,
                     marginLeft: 5,
                     borderRadius: 10,
@@ -232,8 +255,9 @@ export default class ListDataComp extends Component {
                   style={{
                     fontSize: 18,
                     borderWidth: 2,
-                    backgroundColor: '#516f78',
+                    backgroundColor: 'white',
                     opacity: 0.8,
+                    elevation: 7,
                     width: 250,
                     marginLeft: 5,
                     borderRadius: 10,
@@ -248,8 +272,9 @@ export default class ListDataComp extends Component {
                   style={{
                     fontSize: 18,
                     borderWidth: 2,
-                    backgroundColor: '#516f78',
+                    backgroundColor: 'white',
                     opacity: 0.8,
+                    elevation: 7,
                     width: 250,
                     marginLeft: 5,
                     borderRadius: 10,
@@ -265,8 +290,9 @@ export default class ListDataComp extends Component {
                   style={{
                     fontSize: 18,
                     borderWidth: 2,
-                    backgroundColor: '#516f78',
+                    backgroundColor: 'white',
                     opacity: 0.8,
+                    elevation: 7,
                     width: 250,
                     marginLeft: 5,
                     borderRadius: 10,
@@ -278,20 +304,6 @@ export default class ListDataComp extends Component {
                   onChangeText={text => this.setState({price: text})}>
                   {this.state.price}
                 </TextInput>
-                <Text
-                  style={{
-                    fontSize: 18,
-                    borderWidth: 2,
-                    backgroundColor: '#516f78',
-                    opacity: 0.8,
-                    width: 250,
-                    marginLeft: 5,
-                    borderRadius: 10,
-                    margin: 10,
-                    height: 40,
-                  }}>
-                  Category
-                </Text>
                 <Picker
                   selectedValue={this.state.id_category}
                   style={{
@@ -299,7 +311,7 @@ export default class ListDataComp extends Component {
                     borderWidth: 2,
                     backgroundColor: '#516f78',
                     opacity: 0.8,
-                    width: 250,
+                    width: 100,
                     marginLeft: 5,
                     borderRadius: 10,
                     margin: 5,
@@ -323,16 +335,27 @@ export default class ListDataComp extends Component {
                       style={{
                         fontSize: 18,
                         marginTop: 10,
-                        marginLeft: 5,
+                        marginLeft: 120,
                       }}>
                       Upload Image
                     </Text>
                   </View>
                 </TouchableOpacity>
-                <Image
-                  source={{uri: this.state.avatarSource}}
-                  style={{height: 100, width: 100}}
-                />
+                {this.state.avatarSource === null ? (
+                  <View
+                    style={{
+                      height: 100,
+                      width: 100,
+                      borderWidth: 1,
+                      marginLeft: 125,
+                    }}
+                  />
+                ) : (
+                  <Image
+                    source={{uri: this.state.avatarSource}}
+                    style={{height: 100, width: 100, marginLeft: 125}}
+                  />
+                )}
               </View>
               <View style={{flexDirection: 'row', justifyContent: 'center'}}>
                 <TouchableOpacity
@@ -342,8 +365,8 @@ export default class ListDataComp extends Component {
                   <View
                     style={{
                       fontSize: 18,
-                      borderWidth: 2,
-                      backgroundColor: '#516f78',
+                      borderWidth: 1,
+                      backgroundColor: '#bcbcf2',
                       opacity: 0.8,
                       width: 90,
                       marginLeft: 5,
@@ -368,8 +391,8 @@ export default class ListDataComp extends Component {
                     <View
                       style={{
                         fontSize: 18,
-                        borderWidth: 2,
-                        backgroundColor: '#516f78',
+                        borderWidth: 1,
+                        backgroundColor: '#bcbcf2',
                         opacity: 0.8,
                         width: 90,
                         justifyContent: 'center',
@@ -393,8 +416,8 @@ export default class ListDataComp extends Component {
                     <View
                       style={{
                         fontSize: 18,
-                        borderWidth: 2,
-                        backgroundColor: '#516f78',
+                        borderWidth: 1,
+                        backgroundColor: '#bcbcf2',
                         opacity: 0.8,
                         width: 90,
                         justifyContent: 'center',

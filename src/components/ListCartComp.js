@@ -98,7 +98,7 @@ export const styles = StyleSheet.create({
   containers: {
     flexDirection: 'row',
     margin: 0,
-    marginTop: 0,
+    marginTop: -30,
     marginBottom: 40,
     // flex: 1,
     // width: 150,

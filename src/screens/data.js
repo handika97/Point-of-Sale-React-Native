@@ -237,7 +237,10 @@ class product extends Component {
           transparent={false}
           visible={this.state.addProduct}
           style={{}}>
-          <View style={{backgroundColor: '#31a349'}}>
+          <View style={{backgroundColor: 'white'}}>
+            <View style={styles.nav}>
+              <Text style={styles.titleTab}>Add Product</Text>
+            </View>
             <View>
               <View>
                 <TextInput
@@ -245,8 +248,9 @@ class product extends Component {
                     marginTop: 22,
                     fontSize: 18,
                     borderWidth: 2,
-                    backgroundColor: '#516f78',
+                    backgroundColor: 'white',
                     opacity: 0.8,
+                    elevation: 7,
                     width: 250,
                     marginLeft: 5,
                     borderRadius: 10,
@@ -260,8 +264,9 @@ class product extends Component {
                   style={{
                     fontSize: 18,
                     borderWidth: 2,
-                    backgroundColor: '#516f78',
+                    backgroundColor: 'white',
                     opacity: 0.8,
+                    elevation: 7,
                     width: 250,
                     marginLeft: 5,
                     borderRadius: 10,
@@ -275,8 +280,9 @@ class product extends Component {
                   style={{
                     fontSize: 18,
                     borderWidth: 2,
-                    backgroundColor: '#516f78',
+                    backgroundColor: 'white',
                     opacity: 0.8,
+                    elevation: 7,
                     width: 250,
                     marginLeft: 5,
                     borderRadius: 10,
@@ -292,8 +298,9 @@ class product extends Component {
                   style={{
                     fontSize: 18,
                     borderWidth: 2,
-                    backgroundColor: '#516f78',
+                    backgroundColor: 'white',
                     opacity: 0.8,
+                    elevation: 7,
                     width: 250,
                     marginLeft: 5,
                     borderRadius: 10,
@@ -304,20 +311,7 @@ class product extends Component {
                   placeholder="price"
                   onChangeText={text => this.setState({price: text})}
                 />
-                <Text
-                  style={{
-                    fontSize: 18,
-                    borderWidth: 2,
-                    backgroundColor: '#516f78',
-                    opacity: 0.8,
-                    width: 250,
-                    marginLeft: 5,
-                    borderRadius: 10,
-                    margin: 10,
-                    height: 40,
-                  }}>
-                  Category
-                </Text>
+
                 <Picker
                   selectedValue={this.state.id_category}
                   style={{
@@ -325,7 +319,7 @@ class product extends Component {
                     borderWidth: 2,
                     backgroundColor: '#516f78',
                     opacity: 0.8,
-                    width: 250,
+                    width: 100,
                     marginLeft: 5,
                     borderRadius: 10,
                     margin: 5,
@@ -349,16 +343,27 @@ class product extends Component {
                       style={{
                         fontSize: 18,
                         marginTop: 10,
-                        marginLeft: 5,
+                        marginLeft: 120,
                       }}>
                       Upload Image
                     </Text>
                   </View>
                 </TouchableOpacity>
-                <Image
-                  source={{uri: this.state.avatarSource}}
-                  style={{height: 100, width: 100}}
-                />
+                {this.state.avatarSource === null ? (
+                  <View
+                    style={{
+                      height: 100,
+                      width: 100,
+                      borderWidth: 1,
+                      marginLeft: 125,
+                    }}
+                  />
+                ) : (
+                  <Image
+                    source={{uri: this.state.avatarSource}}
+                    style={{height: 100, width: 100, marginLeft: 125}}
+                  />
+                )}
               </View>
               <View style={{flexDirection: 'row', justifyContent: 'center'}}>
                 <TouchableOpacity
@@ -368,8 +373,8 @@ class product extends Component {
                   <View
                     style={{
                       fontSize: 18,
-                      borderWidth: 2,
-                      backgroundColor: '#516f78',
+                      borderWidth: 1,
+                      backgroundColor: '#bcbcf2',
                       opacity: 0.8,
                       width: 90,
                       marginLeft: 5,
@@ -394,8 +399,8 @@ class product extends Component {
                     <View
                       style={{
                         fontSize: 18,
-                        borderWidth: 2,
-                        backgroundColor: '#516f78',
+                        borderWidth: 1,
+                        backgroundColor: '#bcbcf2',
                         opacity: 0.8,
                         width: 90,
                         justifyContent: 'center',
@@ -419,8 +424,8 @@ class product extends Component {
                     <View
                       style={{
                         fontSize: 18,
-                        borderWidth: 2,
-                        backgroundColor: '#516f78',
+                        borderWidth: 1,
+                        backgroundColor: '#bcbcf2',
                         opacity: 0.8,
                         width: 90,
                         justifyContent: 'center',
@@ -499,7 +504,7 @@ class category extends Component {
       const response =
         //await this.props.dispatch(getCategory(y));
         await axios.get(
-          'http://192.168.1.250:4002/api/v1/category/',
+          'http://192.168.1.181:4002/api/v1/category/',
           //   //'http://api.tvmarze.com/search/shows?q=naruto',
         );
       //console.log(this.props.category.categoryData);
@@ -529,7 +534,7 @@ class category extends Component {
 
   addCategory = () => {
     axios
-      .post(`http://192.168.1.250:4002/api/v1/category/`, {
+      .post(`http://192.168.1.181:4002/api/v1/category/`, {
         name_category: this.state.name_category,
       })
       .then(res => {
@@ -603,8 +608,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     paddingLeft: 20,
+    width: '100%',
     borderBottomWidth: 2,
     borderBottomColor: 'blue',
+    elevation: 7,
   },
   titleTab: {
     fontFamily: 'Arial, Helvetica, sans-serif',
