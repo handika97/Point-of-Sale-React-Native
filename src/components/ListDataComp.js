@@ -44,7 +44,7 @@ export default class ListDataComp extends Component {
 
   getCategory = async () => {
     const response = await axios.get(
-      'http://192.168.1.181:4002/api/v1/category/',
+      'http://3.83.117.59:4004/api/v1/category/',
     );
     this.setState({
       category: response.data,
@@ -94,7 +94,7 @@ export default class ListDataComp extends Component {
       });
       dataFile.append('id_category', this.state.id_category);
       await axios.patch(
-        `http://192.168.1.181:4002/api/v1/product/${this.state.id}`,
+        `http://3.83.117.59:4004/api/v1/product/${this.state.id}`,
         dataFile,
       );
     } else {
@@ -109,7 +109,7 @@ export default class ListDataComp extends Component {
 
   deleteProduct = async id => {
     await axios.delete(
-      `http://192.168.1.181:4002/api/v1/product/${this.state.id}`,
+      `http://3.83.117.59:4004/api/v1/product/${this.state.id}`,
     );
     this.setState({dialogDelete: false});
     this.props.get();
@@ -117,7 +117,7 @@ export default class ListDataComp extends Component {
 
   detailProduct = async id => {
     const response = await axios.get(
-      `http://192.168.1.181:4002/api/v1/product/${id}`,
+      `http://3.83.117.59:4004/api/v1/product/${id}`,
     );
     this.setState({
       detail: response.data,
@@ -135,7 +135,10 @@ export default class ListDataComp extends Component {
         <List>
           <ListItem>
             {this.props.data.Image ? (
-              <Thumbnail style={styles.photo} source={{uri: `${ffile}`}} />
+              <Thumbnail
+                style={styles.photo}
+                source={{uri: `${this.props.data.Image}`}}
+              />
             ) : (
               <Text>No Image</Text>
             )}
@@ -311,7 +314,7 @@ export default class ListDataComp extends Component {
                     borderWidth: 2,
                     backgroundColor: '#516f78',
                     opacity: 0.8,
-                    width: 100,
+                    width: 150,
                     marginLeft: 5,
                     borderRadius: 10,
                     margin: 5,
@@ -320,11 +323,12 @@ export default class ListDataComp extends Component {
                   onValueChange={(itemValue, itemIndex) =>
                     this.setState({id_category: itemValue})
                   }>
+                  <Picker.Item label={'Category'} value={'0'} />
                   {this.state.category.map(category => {
                     return (
                       <Picker.Item
                         label={category.name_category}
-                        value={category.id}
+                        value={`${category.id}`}
                       />
                     );
                   })}
@@ -448,7 +452,7 @@ export default class ListDataComp extends Component {
           transparent={false}
           visible={this.state.detailModal}
           style={{}}>
-          <View style={{backgroundColor: '#31a349'}}>
+          <View style={{backgroundColor: 'white'}}>
             <View style={{flexDirection: 'column', justifyContent: 'center'}}>
               <View>
                 <Thumbnail
@@ -457,6 +461,7 @@ export default class ListDataComp extends Component {
                     width: 300,
                     marginTop: 20,
                     marginLeft: 30,
+                    elevation: 20,
                   }}
                   source={{uri: `${ffile}`}}
                 />
@@ -465,7 +470,8 @@ export default class ListDataComp extends Component {
                     marginTop: 20,
                     marginLeft: 77,
                     fontSize: 20,
-                    borderBottomWidth: 1,
+                    borderBottomWidth: 2,
+                    borderBottomColor: '#ff7256',
                   }}>
                   Name Product: {this.state.nama}
                 </Text>
@@ -475,7 +481,8 @@ export default class ListDataComp extends Component {
                     marginTop: 20,
                     marginLeft: 77,
                     fontSize: 20,
-                    borderBottomWidth: 1,
+                    borderBottomWidth: 2,
+                    borderBottomColor: '#ff7256',
                   }}>
                   Description: {this.state.description}
                 </Text>
@@ -485,7 +492,8 @@ export default class ListDataComp extends Component {
                     marginTop: 20,
                     marginLeft: 77,
                     fontSize: 20,
-                    borderBottomWidth: 1,
+                    borderBottomWidth: 2,
+                    borderBottomColor: '#ff7256',
                   }}>
                   Stock: {this.state.stock}
                 </Text>
@@ -495,7 +503,8 @@ export default class ListDataComp extends Component {
                     marginTop: 20,
                     marginLeft: 77,
                     fontSize: 20,
-                    borderBottomWidth: 1,
+                    borderBottomWidth: 2,
+                    borderBottomColor: '#ff7256',
                   }}>
                   Price: {this.state.price}
                 </Text>
@@ -508,7 +517,7 @@ export default class ListDataComp extends Component {
                   style={{
                     fontSize: 18,
                     borderWidth: 2,
-                    backgroundColor: '#516f78',
+                    backgroundColor: '#29dfff',
                     opacity: 0.8,
                     width: 90,
                     marginLeft: 140,

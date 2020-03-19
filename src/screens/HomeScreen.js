@@ -39,6 +39,7 @@ import {
   Image,
   TouchableOpacity,
   Slider,
+  AsyncStorage,
 } from 'react-native';
 //import all the required component
 import AppIntroSlider from 'react-native-app-intro-slider';
@@ -74,8 +75,13 @@ export default class HomeScreen extends React.Component {
         <View style={styles.paginationContainer}>
           <TouchableOpacity
             onPress={() => {
-              this.props.navigation.navigate(`${item.title}`);
-            }}>
+              this.props.navigation.navigate(
+                `${item.title}`,
+                item.title === 'Login' ? AsyncStorage.clear() : null,
+              );
+            }}
+            // {item.title=='Login' ? (AsyncStorage.clear()):null}
+          >
             <View style={styles.button}>
               <Text style={styles.fontLogin}>{item.text}</Text>
             </View>

@@ -18,7 +18,7 @@ export default class ListDataComp extends Component {
   }
 
   editCategory = () => {
-    Axios.patch(`http://192.168.1.181:4002/api/v1/category/${this.state.id}`, {
+    Axios.patch(`http://3.83.117.59:4004/api/v1/category/${this.state.id}`, {
       name_category: this.state.name_category,
     }).then(res => {
       this.props.get();
@@ -28,7 +28,7 @@ export default class ListDataComp extends Component {
 
   deleteCategory = () => {
     Axios.delete(
-      `http://192.168.1.181:4002/api/v1/category/${this.state.id}`,
+      `http://3.83.117.59:4004/api/v1/category/${this.state.id}`,
     ).then(res => {
       this.props.get();
       this.setState({dialogDelete: false});
@@ -100,7 +100,8 @@ export default class ListDataComp extends Component {
         <Dialog.Container visible={this.state.dialogvisible}>
           <Dialog.Title>Edit Product</Dialog.Title>
           <Dialog.Input
-            onChangeText={text => this.setState({name_category: text})}>
+            onChangeText={text => this.setState({name_category: text})}
+            style={{borderBottomWidth: 1}}>
             {this.props.data.name_category}
           </Dialog.Input>
           <Dialog.Button label="Edit" onPress={this.editCategory} />

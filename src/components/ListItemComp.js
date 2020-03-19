@@ -11,8 +11,8 @@ export default class ListItemComp extends React.Component {
 
   render() {
     let file = this.props.data.Image.replace(
-      `http://localhost:4002`,
-      `http://192.168.1.181:4002`,
+      `http://3.83.117.59:4004`,
+      `http://3.83.117.59:4004`,
     );
     return (
       <View>
@@ -24,7 +24,10 @@ export default class ListItemComp extends React.Component {
                   onPress={() => {
                     this.props.cart(this.props.data);
                   }}>
-                  <Thumbnail style={styles.photo} source={{uri: `${file}`}} />
+                  <Thumbnail
+                    style={styles.photo}
+                    source={{uri: `${this.props.data.Image}`}}
+                  />
                 </TouchableOpacity>
               ) : (
                 <Text>No Image</Text>

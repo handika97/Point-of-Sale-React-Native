@@ -56,7 +56,7 @@ export default class product extends Component {
           page = 1;
         }
         const response = await axios.get(
-          `http://192.168.1.181:4002/api/v1/product/${page}`,
+          `http://3.83.117.59:4004/api/v1/product/${page}`,
           //'http://api.tvmaze.com/search/shows?q=naruto',
         );
         console.log(response.data);
@@ -68,7 +68,7 @@ export default class product extends Component {
         });
       } else {
         const response = await axios.get(
-          `http://192.168.1.181:4002/api/v1/shop/search/${this.state.keyword}`,
+          `http://3.83.117.59:4004/api/v1/shop/search/${this.state.keyword}`,
           //'http://api.tvmaze.com/search/shows?q=naruto',
         );
         console.log(response.data);
@@ -221,29 +221,29 @@ export default class product extends Component {
   };
 
   finish = user => {
-    if (this.state.qty.length === 1) {
-      axios.post(`http://192.168.1.181:4002/api/v1/shop/`, {
-        id_item: this.state.qty[0].Id,
-        qty: this.state.qty[0].qty,
-      });
+    // if (this.state.qty.length === 1) {
+    //   axios.post(`http://3.83.117.59:4004/api/v1/api/v1/shop/`, {
+    //     id_item: this.state.qty[0].Id,
+    //     qty: this.state.qty[0].qty,
+    //   });
 
-      console.log(this.state.qty.length);
-    } else {
-      const _storeData = async () => {
-        try {
-          this.state.qty.forEach(async i => {
-            await axios.post(`http://192.168.1.181:4002/api/v1/shop/`, {
-              id_item: i.Id,
-              qty: i.qty,
-            });
+    //   console.log(this.state.qty.length);
+    // } else {
+    const _storeData = async () => {
+      try {
+        this.state.qty.forEach(async i => {
+          await axios.post(`http://3.83.117.59:4004/api/v1/shop/`, {
+            id_item: i.Id,
+            qty: i.qty,
           });
-        } catch (e) {}
-      };
+        });
+      } catch (e) {}
+    };
 
-      _storeData().then(async () => {
-        console.log('selesai');
-      });
-    }
+    _storeData().then(async () => {
+      console.log('selesai');
+    });
+    // }
 
     this.setState({
       user: user,
@@ -254,9 +254,7 @@ export default class product extends Component {
     //console.log(this.state.qty)
   };
   handleOk = async () => {
-    await axios.patch(
-      `http://192.168.1.181:4002/api/v1/shop/${this.state.user}`,
-    );
+    await axios.patch(`http://3.83.117.59:4004/api/v1/shop/${this.state.user}`);
     this.setState({clear: false, dialogvisible: false});
   };
   reset = () => {
@@ -372,15 +370,23 @@ export default class product extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => this.reset()}>
                   <View style={(styles.button, styles.modalButton)}>
-                    <Text
+                    <View
                       style={{
-                        fontSize: 20,
-                        borderBottomWidth: 3,
+                        height: 30,
+                        width: 100,
+                        borderRadius: 10,
                         marginTop: 12,
-                        marginLeft: 40,
+                        marginLeft: 10,
+                        alignItems: 'center',
+                        backgroundColor: '#ffaeaf',
                       }}>
-                      CANCEL
-                    </Text>
+                      <Text
+                        style={{
+                          fontSize: 20,
+                        }}>
+                        CANCEL
+                      </Text>
+                    </View>
                     {/* {this.setState({dialogvisible: false})} */}
                   </View>
                 </TouchableOpacity>
@@ -392,15 +398,23 @@ export default class product extends Component {
                       });
                   }}>
                   <View style={(styles.button, styles.modalButton)}>
-                    <Text
+                    <View
                       style={{
-                        fontSize: 20,
-                        marginLeft: 20,
-                        borderBottomWidth: 3,
+                        height: 30,
+                        width: 100,
+                        borderRadius: 10,
                         marginTop: 12,
+                        marginLeft: 10,
+                        alignItems: 'center',
+                        backgroundColor: '#78edb2',
                       }}>
-                      Checkout
-                    </Text>
+                      <Text
+                        style={{
+                          fontSize: 20,
+                        }}>
+                        Checkout
+                      </Text>
+                    </View>
                   </View>
                 </TouchableOpacity>
                 <Text style={{marginTop: 23, marginLeft: 10}}>

@@ -31,7 +31,7 @@ export default class Register extends React.Component {
   //   console.log(this.state.loginUser.password);
   // };
   onSubmitButton = () => {
-    Axios.post('http://192.168.1.250:4002/api/v1/user/register', {
+    Axios.post('http://3.83.117.59:4004/api/v1/user/register', {
       nama: this.state.nama,
       password: this.state.password,
     }).then(res => {

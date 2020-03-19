@@ -34,8 +34,8 @@ export default class ListCartComp extends Component {
   render() {
     console.log(this.props.data.Image);
     let file = this.props.data.Image.replace(
-      `http://localhost:4002`,
-      `http://192.168.1.181:4002`,
+      `http://3.83.117.59:4004`,
+      `http://3.83.117.59:4004`,
     );
     let price = this.props.data.price * this.state.qty;
     return (
@@ -44,7 +44,10 @@ export default class ListCartComp extends Component {
         <List>
           <ListItem style={styles.containers}>
             {this.props.data.Image ? (
-              <Thumbnail style={styles.photo} source={{uri: `${file}`}} />
+              <Thumbnail
+                style={styles.photo}
+                source={{uri: `${this.props.data.Image}`}}
+              />
             ) : (
               <Text>No Image</Text>
             )}

@@ -32,7 +32,7 @@ class History extends Component {
     };
   }
   record = async () => {
-    await Axios.get('http://192.168.1.181:4002/api/v1/shop/').then(response => {
+    await Axios.get('http://3.83.117.59:4004/api/v1/shop/').then(response => {
       this.setState({
         record: response.data[0],
       });
@@ -54,6 +54,7 @@ class History extends Component {
     // }
   }
   render() {
+    console.log(this.state.record);
     return (
       <View style={stylesd.container_all}>
         <View style={stylesd.title}>
@@ -116,7 +117,7 @@ class Record extends Component {
   }
 
   history = async () => {
-    await Axios.get('http://192.168.1.181:4002/api/v1/shop/history').then(
+    await Axios.get('http://3.83.117.59:4004/api/v1/shop/history').then(
       response => {
         console.log(response.data);
 
@@ -127,7 +128,7 @@ class Record extends Component {
     );
   };
   items = id => {
-    Axios.get(`http://192.168.1.181:4002/api/v1/shop/history/${id}`).then(
+    Axios.get(`http://3.83.117.59:4004/api/v1/shop/history/${id}`).then(
       response => {
         console.log(response.data);
 
@@ -159,7 +160,15 @@ class Record extends Component {
           <Text style={{fontSize: 50, marginLeft: 30}}>HISTORY</Text>
         </View>
         <View style={{flexDirection: 'column'}}>
-          <View style={{flexDirection: 'row', margin: 5, borderBottomWidth: 1}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              marginTop: 10,
+              borderBottomWidth: 1,
+              elevation: 5,
+              backgroundColor: 'white',
+              width: '100%',
+            }}>
             <Text style={{fontSize: 20, margin: 7}}>#</Text>
             <Text style={{fontSize: 20, margin: 7, marginLeft: 8}}>
               Cashier
@@ -175,15 +184,15 @@ class Record extends Component {
                   style={{
                     flexDirection: 'row',
                     margin: 5,
-                    borderBottomWidth: 1,
+
                     alignContent: 'center',
                     justifyContent: 'center',
                   }}>
                   <Text
                     style={{
-                      fontSize: 17,
+                      fontSize: 19,
                       margin: 7,
-                      width: 20,
+                      width: 25,
                       marginLeft: -17,
                     }}>
                     {i + 1}
@@ -213,7 +222,7 @@ const stylesd = StyleSheet.create({
     flex: 1,
     width: 370,
     height: 1000,
-    backgroundColor: '#bdd9d6',
+    backgroundColor: 'white',
   },
   container: {
     flexDirection: 'column',
@@ -232,18 +241,18 @@ const stylesd = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'grey',
     borderBottomColor: 'blue',
+    elevation: 10,
     backgroundColor: '#0384fc',
     borderBottomEndRadius: 10,
   },
   record: {
-    borderWidth: 1,
-    borderColor: 'blue',
     width: 280,
     height: 120,
-    borderBottomStartRadius: 10,
-    borderTopRightRadius: 10,
-    backgroundColor: '#a9c7b1',
+    borderBottomStartRadius: 30,
+    borderTopRightRadius: 30,
+    backgroundColor: '#f2f2bc',
     margin: 5,
+    elevation: 10,
   },
   history: {
     flexDirection: 'row',

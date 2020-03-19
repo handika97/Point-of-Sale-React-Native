@@ -61,7 +61,7 @@ class product extends Component {
 
   getCategory = async () => {
     const response = await axios.get(
-      'http://192.168.1.181:4002/api/v1/category/',
+      'http://3.83.117.59:4004/api/v1/category/',
     );
     this.setState({
       category: response.data,
@@ -75,7 +75,7 @@ class product extends Component {
     try {
       await axios
         .get(
-          'http://192.168.1.181:4002/api/v1/product/',
+          'http://3.83.117.59:4004/api/v1/product/',
           //'http://api.tvmaze.com/search/shows?q=naruto',
         )
         .then(response => {
@@ -108,7 +108,7 @@ class product extends Component {
     try {
       await axios
         .get(
-          'http://192.168.1.181:4002/api/v1/product/',
+          'http://3.83.117.59:4004/api/v1/product/',
           //'http://api.tvmaze.com/search/shows?q=naruto',
         )
         .then(response => {
@@ -181,7 +181,7 @@ class product extends Component {
       });
       dataFile.append('id_category', this.state.id_category);
       axios
-        .post('http://192.168.1.181:4002/api/v1/product/', dataFile)
+        .post('http://3.83.117.59:4004/api/v1/product/', dataFile)
         .then(res => {
           this.getTv();
           this.setState({
@@ -196,6 +196,7 @@ class product extends Component {
   };
 
   render() {
+    console.log(this.state.category);
     const {result, loading, error} = this.state;
     return (
       <SafeAreaView>
@@ -319,7 +320,7 @@ class product extends Component {
                     borderWidth: 2,
                     backgroundColor: '#516f78',
                     opacity: 0.8,
-                    width: 100,
+                    width: 150,
                     marginLeft: 5,
                     borderRadius: 10,
                     margin: 5,
@@ -328,11 +329,12 @@ class product extends Component {
                   onValueChange={(itemValue, itemIndex) =>
                     this.setState({id_category: itemValue})
                   }>
+                  <Picker.Item label={'Category'} value={'0'} />
                   {this.state.category.map(category => {
                     return (
                       <Picker.Item
                         label={category.name_category}
-                        value={category.id}
+                        value={`${category.id}`}
                       />
                     );
                   })}
@@ -504,7 +506,7 @@ class category extends Component {
       const response =
         //await this.props.dispatch(getCategory(y));
         await axios.get(
-          'http://192.168.1.181:4002/api/v1/category/',
+          'http://3.83.117.59:4004/api/v1/category/',
           //   //'http://api.tvmarze.com/search/shows?q=naruto',
         );
       //console.log(this.props.category.categoryData);
@@ -534,7 +536,7 @@ class category extends Component {
 
   addCategory = () => {
     axios
-      .post(`http://192.168.1.181:4002/api/v1/category/`, {
+      .post(`http://3.83.117.59:4004/api/v1/category/`, {
         name_category: this.state.name_category,
       })
       .then(res => {
@@ -565,7 +567,7 @@ class category extends Component {
         ) : error ? (
           <Text>Error, Plaese try again</Text>
         ) : result.length < 1 ? (
-          <Text>No Series fount with keyboard</Text>
+          <Text></Text>
         ) : (
           <FlatList
             vertical
@@ -580,7 +582,8 @@ class category extends Component {
         <Dialog.Container visible={this.state.addCategory}>
           <Dialog.Title>Add Product</Dialog.Title>
           <Dialog.Input
-            onChangeText={text => this.setState({name_category: text})}>
+            onChangeText={text => this.setState({name_category: text})}
+            style={{borderBottomWidth: 1}}>
             name category
           </Dialog.Input>
           <Dialog.Button label="Add" onPress={this.addCategory} />
